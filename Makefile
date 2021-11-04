@@ -1,5 +1,5 @@
 REGISTRY ?= ghcr.io
-USERNAME ?= talos-systems
+USERNAME ?= hainesbg
 SHA ?= $(shell git describe --match=none --always --abbrev=8 --dirty)
 TAG ?= $(shell git describe --tag --always --dirty)
 BRANCH ?= $(shell git rev-parse --abbrev-ref HEAD)
@@ -7,12 +7,12 @@ REGISTRY_AND_USERNAME := $(REGISTRY)/$(USERNAME)
 
 # Sync bldr image with Pkgfile
 BLDR ?= docker run --rm --volume $(PWD):/tools --entrypoint=/bldr \
-	ghcr.io/talos-systems/bldr:v0.2.0-alpha.4-frontend graph --root=/tools
+	ghcr.io/hainesbg/bldr:v0.2.0-alpha.6-2-ge999d96-frontend graph --root=/tools
 
 BUILD := docker buildx build
-PLATFORM ?= linux/amd64,linux/arm64
+PLATFORM ?= linux/amd64
 PROGRESS ?= auto
-PUSH ?= false
+PUSH ?= true
 DEST ?= _out
 COMMON_ARGS := --file=Pkgfile
 COMMON_ARGS += --progress=$(PROGRESS)

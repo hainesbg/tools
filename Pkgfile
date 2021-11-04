@@ -1,11 +1,11 @@
-# syntax = ghcr.io/talos-systems/bldr:v0.2.0-alpha.5-frontend
+# syntax = ghcr.io/hainesbg/bldr:v0.2.0-alpha.6-2-ge999d96-frontend
 
 # Sync bldr image with Makefile
 
 format: v1alpha2
 
 vars:
-  TOOLCHAIN_IMAGE: ghcr.io/talos-systems/toolchain:v0.3.0
+  TOOLCHAIN_IMAGE: ghcr.io/hainesbg/toolchain:v0.3.0-1-g866dbf3
 
 labels:
-  org.opencontainers.image.source: https://github.com/talos-systems/tools
+  org.opencontainers.image.source: https://github.com/hainesbg/tools
