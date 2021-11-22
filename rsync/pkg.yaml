@@ -1,0 +1,37 @@
+name: rsync
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://download.samba.org/pub/rsync/src/rsync-3.2.3.tar.gz
+        destination: rsync.tar.gz
+        sha256: becc3c504ceea499f4167a260040ccf4d9f2ef9499ad5683c179a697146ce50e
+        sha512: 48b68491f3ef644dbbbfcaec5ab90a1028593e02d50367ce161fd9d3d0bd0a3628bc57c5e5dec4be3a1d213f784f879b8a8fcdfd789ba0f99837cba16e1ae70e
+    prepare:
+      - |
+        tar -xzf rsync.tar.gz --strip-components=1
+        mkdir build
+        cd build
+
+        # This is required to avoid "One or more libs available at link-time are not available at run-time".
+        export PKG_CONFIG_PATH=${TOOLCHAIN}/lib/pkgconfig
+
+        ../configure \
+            --prefix=${TOOLCHAIN} \
+            --disable-static \
+            --disable-openssl \
+            --disable-xxhash \
+            --disable-zstd \
+            --disable-lz4
+
+    build:
+      - |
+        cd build
+        make -j $(nproc)
+    install:
+      - |
+        cd build
+        make DESTDIR=/rootfs install
+finalize:
+  - from: /rootfs
+    to: /
