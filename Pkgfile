@@ -5,7 +5,7 @@
 format: v1alpha2
 
 vars:
-  TOOLCHAIN_IMAGE: ghcr.io/hainesbg/toolchain:v0.3.0-1-g866dbf3
+  TOOLCHAIN_IMAGE: ghcr.io/hainesbg/toolchain:v0.3.0-4-g78ff30b
 
 labels:
   org.opencontainers.image.source: https://github.com/hainesbg/tools
